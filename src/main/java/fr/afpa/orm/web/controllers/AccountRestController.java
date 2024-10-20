@@ -28,14 +28,18 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * TODO ajouter la/les annotations nécessaires pour faire de "AccountRestController" un contrôleur de REST API
  */
+@RestController
 public class AccountRestController {
+    private final AccountRepository accountRepository;
     /** 
      * TODO implémenter un constructeur
      *  
      * TODO injecter {@link AccountRepository} en dépendance par injection via le constructeur
      * Plus d'informations -> https://keyboardplaying.fr/blogue/2021/01/spring-injection-constructeur/
      */
-
+    public AccountRestController(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     /**
      * TODO implémenter une méthode qui traite les requêtes GET et qui renvoie une liste de comptes
