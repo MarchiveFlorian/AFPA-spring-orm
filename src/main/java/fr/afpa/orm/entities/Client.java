@@ -2,6 +2,7 @@ package fr.afpa.orm.entities;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -12,6 +13,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -54,6 +58,15 @@ public class Client {
     @JsonIgnore
     @OneToMany(targetEntity = Account.class, mappedBy = "owner")
     private List<Account> accounts;
+
+    // Association ManyToMany
+    @ManyToMany
+    @JoinTable(
+        name = "client_insurance",
+        joinColumns = @JoinColumn(name = "client_id"),
+        inverseJoinColumns = @JoinColumn(name = "insurance_id")
+    )
+    private Set<Insurance> insurances;
 
     public Client() {
         // Constructeur vide.
@@ -105,5 +118,13 @@ public class Client {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public Set<Insurance> getInsurances() {
+        return insurances;
+    }
+
+    public void setInsurances(Set<Insurance> insurances) {
+        this.insurances = insurances;
     }
 }

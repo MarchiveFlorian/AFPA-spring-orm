@@ -47,9 +47,10 @@ public class Account {
      * 
      * Tutoriel présentant l'utilisation d'une telle association : https://koor.fr/Java/TutorialJEE/jee_jpa_many_to_one.wp
      */
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="id")
-    private Client client;
+    @JoinColumn(name="client_id")
+    private Client owner;
     
     /*
     * TODO implémenter un constructeur vide --> obligatoire pour l'utilisation d'un ORM
@@ -84,11 +85,11 @@ public class Account {
         this.balance = balance;
     }
 
-    public Client getClient() {
-        return client;
+    public Client getOwner() {
+        return owner;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setOwner(Client owner) {
+        this.owner = owner;
     }
 }
